@@ -4,102 +4,30 @@
 <title> VSE </title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">  </script>
-<script src="random_location_op_mijn_pc">  </script>
-<script>
-
-var uniqueId = 1;
-var form_data_holder = [];
-
-$(document).ready(function(){
-  $('#friends_add').click(function(f) { friends_changer(1); });
-  $('#friends_del').click(function(f) { friends_changer(0); });
-  $('#submitbutton').click(function(f) { returnData();});
-});
-
-function increase(x) {
-    x++;
-    return x;
-    }
-    
-function decrease(x) {
-    x--;
-    return x;
-    }   
- 
-
-function friends_changer(AddOrRemove) {
-// AddOrRemove == 1, add a form
-// AddOrRemove == 2, remove a form
-
-if (AddOrRemove) {
- uniqueId = increase(uniqueId);
- finalbutton = $('#finalbutton').clone(true);
- $('#finalbutton').remove()
- var copy = $("#singleform").clone(true);
- var formId = 'singleform' + uniqueId;
- copy.attr('id', formId );
- copy.appendTo("body"); 
- finalbutton.appendTo("body");
- } 
- else {
- 	if (uniqueId > 1) {
-     copy = $("#singleform" + uniqueId )  
-     copy.remove()    
-     uniqueId = decrease(uniqueId)
- } } }
- 
-
-function returnData() {
-
-for(count = 1; count < uniqueId+1;count++) {
-form_data_holder = $(`#singleform${count}`);
-prompt(form_data_holder);
-
-}
-}
-
-</script>
+<script src="activity_planner.js">  </script>
 
 <head>
-<body>
+<body onload="initialize()">
 
-<div id="formholder">
+        
+    </div>
 
-<div id="addform">
+    <div id="addform">
+        <form>
+            How many activities do you want to add? 
+            <input type="button" id="friends_add" value="+" onclick="friends_changer(0);">
+            <input type="button" id="friends_del" value="-" onclick="friends_changer(1);">
+            <br><br><br>
+        </form>
+    </div>     
 
-<form>
-How many activities do you want to add? 
-<input type="button" id="friends_add" value="+">
-<input type="button" id="friends_del" value="-">
-
-<br><br><br>
-</form>
-
-
-<div id="singleform">
-  <form >
-      Activity:
-      <input type="text" name="firstname" value="activity">
-      Frequency:
-      <input type="number" min="0" max="365" name="freq" step="1" value="1">
-      Weekends:
-      <input type="checkbox" name="weekends" value="Weekends"><br>
-  </form>
-</div>
-<div id="finalbutton">
-<form>
-<br>
-<input type="button" id="submitbutton" value="press to continue">
-</form>
-</div>
+    <div id="template_location"> 
 
 
-
-
-</div>
-</div>
-
-
-
+    <div id="finalbutton">
+        <form>    <br>
+            <input type="button" id="submitbutton" value="press to continue" onclick="returnData();">
+        </form>
+    </div>
 </body>
 </html>
