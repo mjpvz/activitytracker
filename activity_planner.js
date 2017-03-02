@@ -1,11 +1,5 @@
-var uniqueId = 1;
+var uniqueId = 0;
 var form_data_holder = [];
-
-function initialize() {
-
-form_template();
-}
-
 
 
 function increase(x) {
@@ -19,56 +13,52 @@ function decrease(x) {
     }   
  
 function friends_changer(AddOrRemove) {
-// AddOrRemove == 1, add a form
-// AddOrRemove == 2, remove a form
-console.log(AddOrRemove);
-if (AddOrRemove) {
-//  uniqueId = increase(uniqueId);
-//  finalbutton = $('#finalbutton').clone(true);
-//  $('#finalbutton').remove()
-//  var copy = $("#singleform").clone(true);
-//  var formId = 'singleform' + uniqueId;
-//  copy.attr('id', formId );
-//  copy.appendTo("body"); 
-//  finalbutton.appendTo("body");
-
-form_template();
- } 
- else {
- 	if (uniqueId > 1) {
-     copy = $("#singleform" + uniqueId )  
-     copy.remove()    
-     uniqueId = decrease(uniqueId)
+    if (AddOrRemove) {
+    uniqueId = increase(uniqueId);
+    form_template();
+    } else { 
+        if (uniqueId > 0) {
+        copy = $("#template" + uniqueId )  
+        copy.remove()    
+        uniqueId = decrease(uniqueId)
  } } }
  
 
-
+ 
 function returnData() {
-
-for(count = 1; count < uniqueId+1;count++) {
-form_data_holder = $(`#singleform${count}`);
-prompt(form_data_holder);
-
+    var activity =[];
+    var freq=[];
+    var weekends=[];
+    for(count = 1; count < uniqueId+1;count++) {
+    activity.push(document.getElementById(`name_activity${count}`).value)
+    freq.push(document.getElementById(`name_freq${count}`).value)
+    weekends.push(document.getElementById(`name_weekends${count}`).value)
+    }
+    console.log(activity)
+    console.log(freq)
+    console.log(weekends)
+   
+    
 }
-}
-
 
 function form_template() {
-    var name_activity = 'firstname';
-    var name_freq = 'freq'
-    var name_weekends = 'weekends'
-    $('#template_location').after(`
-    <div id="template">
-    <form >
-        Activity:
-        <input type="text" id="acit" name="${name_activity}" value="activity">
-        Frequency:
-        <input type="number" min="0" max="365" name="${name_freq}" step="1" value="1">
-        Weekends:
-        <input type="checkbox" name="${name_weekends}" value="Weekends"><br>
-    </form>
-    </div>  
-    `)
+    $('#template_location').append(gen_form)
 }
 
 
+
+function gen_form() {
+    html = (`
+    <div id="template${uniqueId}">
+    <form >
+        Activity:
+        <input type="text" name="acit" id="name_activity${uniqueId}" value=""placeholder="Activity">
+        Frequency:
+        <input type="number" min="0" max="365" id="name_freq${uniqueId}" step="1" placeholder="#">
+        Weekends:
+        <input type="checkbox" id="name_weekends${uniqueId}" value="Weekends"><br>
+    </form>
+    </div>      
+    `)
+    return html
+}

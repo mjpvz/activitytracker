@@ -5,23 +5,24 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">  </script>
 <script src="activity_planner.js">  </script>
-
+<link rel="stylesheet" href="simple_style.css">
 <head>
-<body onload="initialize()">
+<body>
 
         
-    </div>
+    <div id="mainwrapper" class="lightpadding" >
 
-    <div id="addform">
+    <div id="addform" class="form">
         <form>
             How many activities do you want to add? 
-            <input type="button" id="friends_add" value="+" onclick="friends_changer(0);">
-            <input type="button" id="friends_del" value="-" onclick="friends_changer(1);">
-            <br><br><br>
+            <input type="button" id="friends_add" value="+" onclick="friends_changer(1);">
+            <input type="button" id="friends_del" value="-" onclick="friends_changer(0);">
+            <br>
         </form>
-    </div>     
+    </div> <br>     
 
-    <div id="template_location"> 
+    <div id="template_location"> </div>
+
 
 
     <div id="finalbutton">
@@ -29,5 +30,6 @@
             <input type="button" id="submitbutton" value="press to continue" onclick="returnData();">
         </form>
     </div>
+    </div
 </body>
 </html>
